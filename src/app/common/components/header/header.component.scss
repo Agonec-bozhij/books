@@ -1,0 +1,22 @@
+.toolbar {
+
+    &-item {
+        padding: 0 6px;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
+        }
+    }
+
+    &-link {
+        position: relative;
+        bottom: -1px;
+        cursor: pointer;
+        text-decoration: none;
+        color: white;
+    }
+}
