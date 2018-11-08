@@ -8,7 +8,10 @@ import {HeaderComponent} from "./common/components/header/header.component";
 import {SidenavComponent} from "./common/components/sidenav/sidenav.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "./common/modules/material.module";
-import { HomeComponent } from './common/components/home/home.component';
+import {HomeComponent} from "./common/components/home/home.component";
+import {HttpClientModule} from "@angular/common/http";
+import {REPOSITORIES_BARREL} from "./common/repositories/repositories-barrel";
+import {SERVICES_BARREL} from "./common/services/services-barrel";
 
 @NgModule({
     declarations: [
@@ -21,10 +24,14 @@ import { HomeComponent } from './common/components/home/home.component';
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        HttpClientModule,
         AppRoutingModule,
         MaterialModule
     ],
-    providers: [],
+    providers: [
+        REPOSITORIES_BARREL,
+        SERVICES_BARREL
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
