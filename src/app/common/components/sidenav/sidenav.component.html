@@ -6,12 +6,16 @@
         <mat-nav-list>
             <h3 mat-subheader>Навигация</h3>
             <mat-divider></mat-divider>
-            <mat-list-item>
+            <mat-list-item class="sidenav-link"
+                           routerLink="home"
+                           routerLinkActive="sidenav-link--active">
                 <mat-icon mat-list-icon>home</mat-icon>
                 <h4 mat-line>Главная</h4>
             </mat-list-item>
     
-            <mat-list-item>
+            <mat-list-item class="sidenav-link"
+                           routerLink="list"
+                           routerLinkActive="sidenav-link--active">
                 <mat-icon mat-list-icon>book</mat-icon>
                 <h4 mat-line>Книги</h4>
             </mat-list-item>
@@ -20,5 +24,8 @@
     
     <mat-sidenav-content>
         <ng-content select="bk-header"></ng-content>
+        <div class="sidenav-content">
+            <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

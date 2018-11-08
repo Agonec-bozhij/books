@@ -8,13 +8,15 @@ import {HeaderComponent} from "./common/components/header/header.component";
 import {SidenavComponent} from "./common/components/sidenav/sidenav.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "./common/modules/material.module";
+import { HomeComponent } from './common/components/home/home.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ShellComponent,
         HeaderComponent,
-        SidenavComponent
+        SidenavComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,

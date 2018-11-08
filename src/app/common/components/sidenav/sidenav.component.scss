@@ -1,7 +1,23 @@
+@import "../../../../theme";
+
 .sidenav {
     width: 250px;
 
     &-container {
         height: 100%;
+    }
+
+    &-content {
+        height: calc(100% - 64px);
+        padding: 24px;
+    }
+
+    &-link {
+        border-left: 5px solid;
+        border-color: transparent;
+
+        &--active {
+            border-color: mat-color($books-warn);
+        }
     }
 }
