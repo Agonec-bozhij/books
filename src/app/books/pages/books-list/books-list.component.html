@@ -1,1 +1,11 @@
 <h1 class="page-header">Список книг</h1>
+
+<div class="books mat-elevation-z6">
+    <mat-nav-list>
+        <h3 mat-subheader>Книги</h3>
+        <mat-list-item *ngFor="let book of books">
+            <mat-icon mat-list-icon color="accent">book</mat-icon>
+            <h4 mat-line>{{book.title}}</h4>
+        </mat-list-item>
+    </mat-nav-list>
+</div>
