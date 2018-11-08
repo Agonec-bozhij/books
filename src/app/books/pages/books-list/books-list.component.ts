@@ -10,7 +10,8 @@ import {take} from "rxjs/operators";
 })
 export class BooksListComponent implements OnInit {
     
-    private books: Book[] = [];
+    public books: Book[] = [];
+    
     private booksService: BooksService;
     
     constructor(booksService: BooksService) {
