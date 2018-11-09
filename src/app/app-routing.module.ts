@@ -5,7 +5,7 @@ import {BooksModule} from "./books/books.module";
 
 const routes: Routes = [
     {path: "home", component: HomeComponent, pathMatch: "full"},
-    {path: "list", loadChildren: () => BooksModule},
+    {path: "list", loadChildren: "./books/books.module#BooksModule"},
     {path: "**", redirectTo: "/home"}
 ];
 
