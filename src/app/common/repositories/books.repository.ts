@@ -14,7 +14,7 @@ export class BooksRepository {
     }
     
     public getBooks(): Observable<Book[]> {
-        return this.http.get<Book[]>("/books/assets/initial-data/books.json")
+        return this.http.get<Book[]>("/assets/initial-data/books.json")
             .pipe(
                 map((books) => books.map((book) => new Book().fromJSON(book)))
             );
