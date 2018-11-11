@@ -1,4 +1,107 @@
 .books {
     margin: 24px 0;
+    white-space: nowrap;
+
+    &-left, &-right {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+    }
+
+    &-right {
+        padding-left: 24px;
+    }
+
+    &-list {
+        white-space: normal;
+        width: 100%;
+
+        &_head {
+
+            & .books-list_row {
+
+                &:hover {
+                    background-color: transparent;
+                }
+
+                & .books-list_col {
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        &_body {
+
+            & .books-list_col {
+                height: 120px;
+            }
+        }
+
+        &_row {
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            border-bottom: 1px solid rgba(0, 0, 0, .12);
+            overflow: hidden;
+            cursor: pointer;
+            padding: 0 24px;
+
+            &:hover {
+                background-color: #e5e5e5;
+            }
+
+            & .books-list_col {
+                display: inline-flex;
+                overflow: hidden;
+
+                &--title {
+                    flex-basis: 150%;
+                }
+
+                &--authors {
+                    flex-direction: column;
+                }
+
+                &_author {
+                    padding-bottom: 12px;
+
+                    &:last-child {
+                        padding-bottom: 0;
+                    }
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &_col {
+            //width: 100%;
+            flex-basis: 100%;
+            //min-width: calc(100% / 7);
+            padding: 24px 0;
+        }
+    }
+}
+
+.book {
     background-color: white;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+
+    &-content {
+        padding: 24px;
+    }
+
+    &-hide {
+        position: absolute;
+        right: 24px;
+        top: 24px;
+
+        &_button {
+
+        }
+    }
 }

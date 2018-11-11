@@ -1,11 +1,71 @@
 <h1 class="page-header">Список книг</h1>
 
-<div class="books mat-elevation-z6">
-    <mat-nav-list>
-        <h3 mat-subheader>Книги</h3>
-        <mat-list-item *ngFor="let book of books">
-            <mat-icon mat-list-icon color="accent">book</mat-icon>
-            <h4 mat-line>{{book.title}}</h4>
-        </mat-list-item>
-    </mat-nav-list>
+<div class="books">
+    <div class="books-left"
+    [@bookListState]="getListCollpasedState()">
+        <div class="books-list mat-elevation-z6">
+            <div class="books-list_head">
+                <div class="books-list_row">
+                    <div class="books-list_col books-list_col--title">Название</div>
+                    <div class="books-list_col">Авторы</div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">Стр.</div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">Издатель</div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">Год публикации</div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">Дата выхода</div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">ISBN</div>
+                </div>
+            </div>
+        
+            <div class="books-list_body">
+                <div class="books-list_row"
+                     *ngFor="let book of books"
+                     (click)="onClickRow(book)"
+                     mat-ripple>
+                    <div class="books-list_col books-list_col--title">{{book.title}}</div>
+                    <div class="books-list_col books-list_col--authors">
+                        <span class="books-list_col_author" *ngFor="let author of book.authors">
+                        {{author.name}} {{author.lastname}}
+                    </span>
+                    </div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.pages}}</div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.publisher}}</div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.publicationYear}}</div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.releaseDate | date:"dd/MM/yyyy"}}</div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.isbn}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="books-right"
+         *ngIf="selectedBook"
+         [@bookState]="getCardCollapsedState()">
+        <div class="book mat-elevation-z6">
+            <div class="book-content">
+                <div class="book-hide">
+                    <button class="book-hide_button"
+                            mat-icon-button
+                            (click)="onHideBook()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+                <div class="book-title">
+                    <p>111</p>{{selectedBook?.title}}
+                </div>
+                <div class="book-title">
+                    <p>111</p>{{selectedBook?.title}}
+                </div>
+                <div class="book-title">
+                    <p>111</p>{{selectedBook?.title}}
+                </div>
+                <div class="book-title">
+                    <p>111</p>{{selectedBook?.title}}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
