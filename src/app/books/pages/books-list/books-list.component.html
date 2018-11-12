@@ -49,28 +49,8 @@
     <div class="books-right"
          *ngIf="selectedBook"
          [@bookState]="getCardCollapsedState()">
-        <div class="book mat-elevation-z6">
-            <div class="book-content">
-                <div class="book-hide">
-                    <button class="book-hide_button"
-                            mat-icon-button
-                            (click)="onHideBook()">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                </div>
-                <div class="book-title">
-                    <p>111</p>{{selectedBook?.title}}
-                </div>
-                <div class="book-title">
-                    <p>111</p>{{selectedBook?.title}}
-                </div>
-                <div class="book-title">
-                    <p>111</p>{{selectedBook?.title}}
-                </div>
-                <div class="book-title">
-                    <p>111</p>{{selectedBook?.title}}
-                </div>
-            </div>
+        <div class="books-view mat-elevation-z6">
+            <bk-book-view [book]="selectedBook"></bk-book-view>
         </div>
     </div>
 </div>
