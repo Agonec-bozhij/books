@@ -1,3 +1,111 @@
-<p>
-  book-edit works!
-</p>
+<h3 class="form-title">
+    Редактирование книги
+</h3>
+
+<form [formGroup]="form">
+    <div class="form-group">
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Название книги</mat-label>
+                <input matInput
+                       placeholder="Например: Преступление и наказание"
+                       formControlName="title"
+                       required>
+                <mat-error *ngIf="form.get('title').hasError('required')">
+                    Поле является обязательным
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Кол-во страниц</mat-label>
+                <input matInput
+                       placeholder="Например: 357"
+                       formControlName="pages"
+                       type="number"
+                       required>
+                <mat-error *ngIf="form.get('pages').hasError('required')">
+                    Поле является обязательным
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Издательство</mat-label>
+                <input matInput
+                       placeholder="Например: Издательсво Питер"
+                       formControlName="publisher"
+                       required>
+                <mat-error *ngIf="form.get('publisher').hasError('required')">
+                    Поле является обязательным
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Год публикацмм</mat-label>
+                <input matInput
+                       placeholder="Например: 1998"
+                       formControlName="publicationYear"
+                       required>
+                <mat-error *ngIf="form.get('publicationYear').hasError('required')">
+                    Поле является обязательным
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Дата выхода в тираж</mat-label>
+                <input matInput
+                       formControlName="releaseDate"
+                       [matDatepicker]="picker"
+                       placeholder="Выберите дату">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="form.get('releaseDate').hasError('required')">
+                    Поле является обязательным
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>ISBN</mat-label>
+                <input matInput
+                       placeholder="Например: 111-222-333"
+                       formControlName="isbn"
+                       required>
+                <mat-error *ngIf="form.get('isbn').hasError('required')">
+                    Поле является обязательным
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="form-actions">
+        <div class="spacer"></div>
+        
+        <button mat-button color="warn">
+            Отмена
+        </button>
+        
+        <button mat-raised-button color="primary">
+            <mat-icon>save</mat-icon>
+            Сохранить
+        </button>
+    </div>
+</form>

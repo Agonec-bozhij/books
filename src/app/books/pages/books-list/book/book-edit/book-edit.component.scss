@@ -1,0 +1,23 @@
+.form {
+
+    &-title {
+        margin-bottom: 24px;
+    }
+
+    &-group {
+
+    }
+
+    &-control {
+
+        mat-form-field {
+            width: 100%;
+        }
+    }
+
+    &-actions {
+        display: flex;
+    }
+}
+
+
