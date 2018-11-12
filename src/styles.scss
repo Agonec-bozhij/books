@@ -20,7 +20,18 @@ body {
     flex: 1 0 auto;
 }
 
-.page-header {
-    font-size: 26px;
-    font-weight: 300;
+
+
+.page {
+
+    &-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    &-header {
+        font-size: 26px;
+        font-weight: 300;
+    }
 }
