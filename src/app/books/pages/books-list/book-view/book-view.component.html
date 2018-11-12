@@ -1,0 +1,93 @@
+<div class="book-content">
+    <div class="book-hide">
+        <button class="book-hide_button"
+                mat-icon-button
+                (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="book-content_title">
+        {{book.title}}
+    </div>
+    
+    <div class="book-content_image">
+        <img [src]="book.image" alt="Обложка книги">
+    </div>
+    
+    <div class="book-content_info">
+        <div class="book-content_info-row">
+            <div class="book-info_name">
+                Авторы
+            </div>
+            
+            <span class="book-content_info-row-spacer"></span>
+            
+            <div class="book-content_info-description">
+                <ng-container *ngFor="let author of book.authors">
+                    <span>{{author.name}}</span>
+                    <span>{{author.lastname}}</span>
+                </ng-container>
+            </div>
+        </div>
+        
+        <div class="book-content_info-row">
+            <div class="book-content_info-name">
+                Кол-во страниц
+            </div>
+            
+            <span class="book-content_info-row-spacer"></span>
+            
+            <div class="book-content_info-description">
+                <span>{{book.pages}}</span>
+            </div>
+        </div>
+        
+        <div class="book-content_info-row">
+            <div class="book-content_info-name">
+                Издательство
+            </div>
+            
+            <span class="book-content_info-row-spacer"></span>
+            
+            <div class="book-content_info-description">
+                <span>{{book.publisher}}</span>
+            </div>
+        </div>
+        
+        <div class="book-content_info-row">
+            <div class="book-content_info-name">
+                Год публикации
+            </div>
+            
+            <span class="book-content_info-row-spacer"></span>
+            
+            <div class="book-content_info-description">
+                <span>{{book.publicationYear}}</span>
+            </div>
+        </div>
+        
+        <div class="book-content_info-row">
+            <div class="book-content_info-name">
+                Дата выхода
+            </div>
+            
+            <span class="book-content_info-row-spacer"></span>
+            
+            <div class="book-content_info-description">
+                <span>{{book.releaseDate | date: "dd.MM.yy"}}</span>
+            </div>
+        </div>
+        
+        <div class="book-content_info-row">
+            <div class="book-content_info-name">
+                ISBN
+            </div>
+            
+            <span class="book-content_info-row-spacer"></span>
+            
+            <div class="book-content_info-description">
+                <span>{{book.isbn}}</span>
+            </div>
+        </div>
+    </div>
+</div>
