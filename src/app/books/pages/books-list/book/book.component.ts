@@ -1,4 +1,5 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Book} from "../../../../common/models/entities/book";
 
 @Component({
     selector: "bk-book",
@@ -6,5 +7,16 @@ import {Component} from "@angular/core";
     styleUrls: ["./book.component.scss"]
 })
 export class BookComponent {
-
+    
+    @Input() public book!: Book;
+    
+    @Output() public readonly close = new EventEmitter<void>();
+    
+    constructor() {
+        //
+    }
+    
+    public onClose(): void {
+        this.close.next();
+    }
 }

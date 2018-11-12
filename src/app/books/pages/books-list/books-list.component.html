@@ -53,8 +53,8 @@
          *ngIf="selectedBook"
          [@bookState]="getCardCollapsedState()">
         <div class="books-view mat-elevation-z6">
-            <bk-book-view [book]="selectedBook"
-                          (close)="onHideBook()"></bk-book-view>
+            <bk-book [book]="selectedBook"
+                     (close)="onHideBook()"></bk-book>
         </div>
     </div>
 </div>

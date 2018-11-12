@@ -1,3 +1,9 @@
-<p>
-  book works!
-</p>
+<div class="book-hide">
+    <button class="book-hide_button"
+            mat-icon-button
+            (click)="onClose()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<bk-book-view [book]="book"></bk-book-view>

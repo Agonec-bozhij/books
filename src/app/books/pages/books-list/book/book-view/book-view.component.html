@@ -1,11 +1,5 @@
 <div class="book-content">
-    <div class="book-hide">
-        <button class="book-hide_button"
-                mat-icon-button
-                (click)="onClose()">
-            <mat-icon>close</mat-icon>
-        </button>
-    </div>
+    
     <div class="book-content_title">
         {{book.title}}
     </div>
@@ -89,5 +83,21 @@
                 <span>{{book.isbn}}</span>
             </div>
         </div>
+    </div>
+    
+    <div class="book-actions">
+        <div class="spacer"></div>
+        <button class="book-actions_item"
+                mat-button
+                color="warn">
+            <mat-icon>delete</mat-icon>
+            Удалить
+        </button>
+        <button class="book-actions_item"
+                mat-raised-button
+                color="primary">
+            <mat-icon>edit</mat-icon>
+            Редактировать
+        </button>
     </div>
 </div>
