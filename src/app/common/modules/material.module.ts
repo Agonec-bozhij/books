@@ -1,9 +1,10 @@
 import {NgModule} from "@angular/core";
 import {
+    MAT_DATE_LOCALE,
     MatButtonModule,
-    MatCardModule, MatFormFieldModule,
+    MatCardModule, MatDatepickerModule, MatFormFieldModule,
     MatIconModule, MatInputModule,
-    MatListModule,
+    MatListModule, MatNativeDateModule,
     MatRippleModule,
     MatSidenavModule,
     MatToolbarModule
@@ -19,7 +20,9 @@ import {
         MatCardModule,
         MatRippleModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     exports: [
         MatToolbarModule,
@@ -30,7 +33,12 @@ import {
         MatCardModule,
         MatRippleModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule
+    ],
+    providers: [
+        {provide: MAT_DATE_LOCALE, useValue: "ru-RU"}
     ]
 })
 export class MaterialModule {
