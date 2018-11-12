@@ -6,12 +6,14 @@ import {BooksListComponent} from "./pages/books-list/books-list.component";
 import {MaterialModule} from "../common/modules/material.module";
 import {BookViewComponent} from "./pages/books-list/book/book-view/book-view.component";
 import {BookComponent} from "./pages/books-list/book/book.component";
+import { BookEditComponent } from './pages/books-list/book/book-edit/book-edit.component';
 
 @NgModule({
     declarations: [
         BooksListComponent,
         BookViewComponent,
-        BookComponent
+        BookComponent,
+        BookEditComponent
     ],
     imports: [
         CommonModule,
