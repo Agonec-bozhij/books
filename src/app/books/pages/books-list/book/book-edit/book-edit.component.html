@@ -20,6 +20,33 @@
     
     <div class="form-group">
         <div class="form-control">
+            <div class="form-image">
+                <div class="form-image_preview">
+                    <img [src]="form.get('image').value" alt="Превью обложки">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-control">
+            <div class="form-upload">
+                <input class="form-upload_input"
+                       type="file"
+                       #imageInput>
+                
+                <div class="form-upload_container">
+                    <mat-icon>cloud_download</mat-icon>
+                    <div class="form-upload_text">
+                        Кликните для выбора файла или перетащите файл в это поле
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="form-control">
             <mat-form-field>
                 <mat-label>Кол-во страниц</mat-label>
                 <input matInput
