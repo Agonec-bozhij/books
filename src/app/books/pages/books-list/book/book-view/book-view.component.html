@@ -16,11 +16,9 @@
             
             <span class="book-content_info-row-spacer"></span>
             
-            <div class="book-content_info-description">
-                <ng-container *ngFor="let author of book.authors">
-                    <span>{{author.name}}</span>
-                    <span>{{author.lastname}}</span>
-                </ng-container>
+            <div class="book-content_info-description"
+            [title]="getHumanReadableAuthors()">
+                    {{getHumanReadableAuthors()}}
             </div>
         </div>
         

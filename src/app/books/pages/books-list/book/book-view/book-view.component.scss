@@ -4,6 +4,7 @@
         &_title {
             margin: 0 40px 24px 0;
             font-size: 20px;
+            white-space: normal;
         }
 
         &_image {
@@ -39,7 +40,9 @@
             }
 
             &-description {
-
+                max-width: 60%;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }

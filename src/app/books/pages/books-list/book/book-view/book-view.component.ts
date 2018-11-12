@@ -13,4 +13,13 @@ export class BookViewComponent {
     constructor() {
         //
     }
+    
+    public getHumanReadableAuthors(): string {
+        const authors: string[] = [];
+        
+        this.book.authors
+            .forEach((author) => authors.push(`${author.name[0]}. ${author.lastname}`));
+        
+        return authors.join(",");
+    }
 }
