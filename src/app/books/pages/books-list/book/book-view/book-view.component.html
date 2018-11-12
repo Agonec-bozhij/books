@@ -17,8 +17,8 @@
             <span class="book-content_info-row-spacer"></span>
             
             <div class="book-content_info-description"
-            [title]="getHumanReadableAuthors()">
-                    {{getHumanReadableAuthors()}}
+                 [title]="getHumanReadableAuthors()">
+                {{getHumanReadableAuthors()}}
             </div>
         </div>
         
@@ -93,7 +93,8 @@
         </button>
         <button class="book-actions_item"
                 mat-raised-button
-                color="primary">
+                color="primary"
+                (click)="onEdit()">
             <mat-icon>edit</mat-icon>
             Редактировать
         </button>

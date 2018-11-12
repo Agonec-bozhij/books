@@ -1,4 +1,5 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
+import {Book} from "../../../../../common/models/entities/book";
 
 @Component({
     selector: "bk-book-edit",
@@ -6,4 +7,6 @@ import {Component} from "@angular/core";
     styleUrls: ["./book-edit.component.scss"]
 })
 export class BookEditComponent {
+    
+    @Input() public book: Book;
 }

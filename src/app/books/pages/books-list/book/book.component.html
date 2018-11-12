@@ -6,4 +6,9 @@
     </button>
 </div>
 
-<bk-book-view [book]="book"></bk-book-view>
+<bk-book-view *ngIf="!editMode"
+              [book]="book"
+              (edit)="onEdit()"></bk-book-view>
+
+<bk-book-edit *ngIf="editMode"
+              [book]="book"></bk-book-edit>

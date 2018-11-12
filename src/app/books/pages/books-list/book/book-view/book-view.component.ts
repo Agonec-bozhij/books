@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Book} from "../../../../../common/models/entities/book";
 
 @Component({
@@ -9,6 +9,8 @@ import {Book} from "../../../../../common/models/entities/book";
 export class BookViewComponent {
     
     @Input() public book!: Book;
+    
+    @Output() public readonly edit = new EventEmitter<void>();
     
     constructor() {
         //
@@ -21,5 +23,9 @@ export class BookViewComponent {
             .forEach((author) => authors.push(`${author.name[0]}. ${author.lastname}`));
         
         return authors.join(",");
+    }
+    
+    public onEdit(): void {
+        this.edit.next();
     }
 }
