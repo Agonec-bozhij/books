@@ -11,7 +11,7 @@
 
 <div class="books">
     <div class="books-left"
-    [@bookListState]="getListCollpasedState()">
+         [@bookListState]="getListCollpasedState()">
         <div class="books-list mat-elevation-z6">
             <div class="books-list_head">
                 <div class="books-list_row">
@@ -24,7 +24,7 @@
                     <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">ISBN</div>
                 </div>
             </div>
-        
+            
             <div class="books-list_body">
                 <div class="books-list_row"
                      *ngFor="let book of books"
@@ -38,8 +38,11 @@
                     </div>
                     <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.pages}}</div>
                     <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.publisher}}</div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.publicationYear}}</div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.releaseDate | date:"dd/MM/yyyy"}}</div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.publicationYear}}
+                    </div>
+                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.releaseDate |
+                        date:"dd/MM/yyyy"}}
+                    </div>
                     <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.isbn}}</div>
                 </div>
             </div>
@@ -50,7 +53,8 @@
          *ngIf="selectedBook"
          [@bookState]="getCardCollapsedState()">
         <div class="books-view mat-elevation-z6">
-            <bk-book-view [book]="selectedBook"></bk-book-view>
+            <bk-book-view [book]="selectedBook"
+                          (close)="onHideBook()"></bk-book-view>
         </div>
     </div>
 </div>
