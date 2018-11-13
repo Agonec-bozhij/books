@@ -14,8 +14,9 @@
         <div class="spacer"></div>
         
         <div class="toolbar-item">
-            <button mat-icon-button>
-                <mat-icon>exit_to_app</mat-icon>
+            <button mat-button (click)="onRefresh()">
+                <mat-icon>refresh</mat-icon>
+                Очистит LocalStorage и перезагрузить
             </button>
         </div>
     </mat-toolbar-row>

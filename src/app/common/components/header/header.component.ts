@@ -21,4 +21,9 @@ export class HeaderComponent {
     public onClickTitle(): void {
         this.headerClicked$.next();
     }
+    
+    public onRefresh(): void {
+        localStorage.clear();
+        window.location.reload();
+    }
 }
