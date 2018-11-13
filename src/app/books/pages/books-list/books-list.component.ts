@@ -1,9 +1,10 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {BooksService} from "../../../common/services/books.service";
 import {Book} from "../../../common/models/entities/book";
-import {take, takeUntil} from "rxjs/operators";
+import {takeUntil} from "rxjs/operators";
 import {bookListTrigger, BookState, bookTrigger} from "../../../common/animations/collapse.animations";
 import {Subject} from "rxjs";
+import {BookMode} from "../../../common/models/enums/book-mode";
 
 @Component({
     selector: "bk-books-list",
@@ -16,17 +17,13 @@ import {Subject} from "rxjs";
 })
 export class BooksListComponent implements OnInit, OnDestroy {
     
-    public selectedBook: Book | null = null;
     public books: Book[] = [];
     
     private booksService: BooksService;
-    
-    private cdr: ChangeDetectorRef;
     private destroy$ = new Subject<void>();
     
-    constructor(booksService: BooksService, cdr: ChangeDetectorRef) {
+    constructor(booksService: BooksService) {
         this.booksService = booksService;
-        this.cdr = cdr;
     }
     
     public ngOnInit() {
@@ -35,13 +32,6 @@ export class BooksListComponent implements OnInit, OnDestroy {
         )
             .subscribe((books: Book[]) => {
                 this.books = books;
-    
-                const selectedBookExists = this.selectedBook
-                    && this.books.find((book) => book.title === this.selectedBook.title);
-                
-                if (!selectedBookExists) {
-                    this.selectedBook = null;
-                }
             });
     }
     
@@ -51,18 +41,29 @@ export class BooksListComponent implements OnInit, OnDestroy {
     }
     
     public onClickRow(event: Book): void {
-        this.selectedBook = event;
+        this.booksService.selectBook(event);
+        this.booksService.mode = BookMode.View;
+    }
+    
+    public onCreateBook(): void {
+        this.booksService.deselectBook();
+        this.booksService.mode = BookMode.Create;
+    }
+    
+    public bookHidden(): boolean {
+        return this.booksService.mode === BookMode.Hidden;
     }
     
     public onHideBook(): void {
-        this.selectedBook = null;
+        this.booksService.deselectBook();
+        this.booksService.mode = BookMode.Hidden;
     }
     
     public getCardCollapsedState(): BookState {
-        return this.selectedBook ? BookState.Expanded : BookState.Collapsed;
+        return this.bookHidden() ? BookState.Collapsed : BookState.Expanded;
     }
     
     public getListCollpasedState(): BookState {
-        return this.selectedBook ? BookState.Collapsed : BookState.Expanded;
+        return this.bookHidden() ? BookState.Expanded : BookState.Collapsed;
     }
 }

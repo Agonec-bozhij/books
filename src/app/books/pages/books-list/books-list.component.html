@@ -2,7 +2,9 @@
     <h1 class="page-header">Список книг</h1>
     
     <div class="page-actions">
-        <button mat-raised-button color="primary">
+        <button mat-raised-button
+                color="primary"
+                (click)="onCreateBook()">
             <mat-icon>playlist_add</mat-icon>
             Добавить книгу
         </button>
@@ -17,11 +19,11 @@
                 <div class="books-list_row">
                     <div class="books-list_col books-list_col--title">Название</div>
                     <div class="books-list_col">Авторы</div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">Стр.</div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">Издатель</div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">Год публикации</div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">Дата выхода</div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">ISBN</div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">Стр.</div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">Издатель</div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">Год публикации</div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">Дата выхода</div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">ISBN</div>
                 </div>
             </div>
             
@@ -36,25 +38,24 @@
                         {{author.name}} {{author.lastname}}
                     </span>
                     </div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.pages}}</div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.publisher}}</div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.publicationYear}}
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">{{book.pages}}</div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">{{book.publisher}}</div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">{{book.publicationYear}}
                     </div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.releaseDate |
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">{{book.releaseDate |
                         date:"dd/MM/yyyy"}}
                     </div>
-                    <div *ngIf="!selectedBook" class="books-list_col animation-col-collapse">{{book.isbn}}</div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">{{book.isbn}}</div>
                 </div>
             </div>
         </div>
     </div>
     
     <div class="books-right"
-         *ngIf="selectedBook"
+         *ngIf="!bookHidden()"
          [@bookState]="getCardCollapsedState()">
         <div class="books-view mat-elevation-z6">
-            <bk-book [book]="selectedBook"
-                     (close)="onHideBook()"></bk-book>
+            <bk-book (close)="onHideBook()"></bk-book>
         </div>
     </div>
 </div>
