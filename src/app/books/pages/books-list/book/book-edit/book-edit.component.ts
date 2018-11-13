@@ -66,9 +66,7 @@ export class BookEditComponent implements OnInit, AfterViewInit, OnDestroy {
     public onSubmit(): void {
         if (this.form.valid) {
             const book = new Book().fromJSON(this.form.value);
-            this.booksService.updateBook(book).pipe(
-            
-            ).subscribe(
+            this.booksService.updateBook(book).subscribe(
                 () => this.toastrService.success(`Книга ${book.title} сохранена успешно`),
                 () => this.toastrService.success(`Произошла ошибка при сохранении книги ${book.title}`)
             );

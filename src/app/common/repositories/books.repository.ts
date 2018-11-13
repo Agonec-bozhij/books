@@ -41,17 +41,19 @@ export class BooksRepository {
     }
     
     public deleteBook(book: Book): Observable<void> {
-        return this.getBooks().pipe(
-            switchMap((books) => {
+        return new Observable((observer) => {
+            this.getBooks().subscribe((books: Book[]) => {
                 const indexToDelete = books.findIndex((searchBook) => searchBook.title === book.title);
-                
+    
                 if (indexToDelete >= 0) {
-                    this.saveBooksToLocalStorage(books.splice(indexToDelete, 1));
+                    books.splice(indexToDelete, 1);
+                    this.saveBooksToLocalStorage(books);
                 }
                 
-                return of();
-            })
-        );
+                observer.next();
+                observer.complete();
+            });
+        });
     }
     
     private getEditObservable(book: Book, edit: boolean): Observable<Book> {

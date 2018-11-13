@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from "@angular/core";
 import {BooksService} from "../../../common/services/books.service";
 import {Book} from "../../../common/models/entities/book";
 import {take, takeUntil} from "rxjs/operators";
@@ -21,10 +21,12 @@ export class BooksListComponent implements OnInit, OnDestroy {
     
     private booksService: BooksService;
     
+    private cdr: ChangeDetectorRef;
     private destroy$ = new Subject<void>();
     
-    constructor(booksService: BooksService) {
+    constructor(booksService: BooksService, cdr: ChangeDetectorRef) {
         this.booksService = booksService;
+        this.cdr = cdr;
     }
     
     public ngOnInit() {
@@ -33,7 +35,13 @@ export class BooksListComponent implements OnInit, OnDestroy {
         )
             .subscribe((books: Book[]) => {
                 this.books = books;
-                console.log("booksChanged$", books);
+    
+                const selectedBookExists = this.selectedBook
+                    && this.books.find((book) => book.title === this.selectedBook.title);
+                
+                if (!selectedBookExists) {
+                    this.selectedBook = null;
+                }
             });
     }
     

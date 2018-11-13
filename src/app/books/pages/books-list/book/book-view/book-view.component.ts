@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {Book} from "../../../../../common/models/entities/book";
+import {ToastrService} from "ngx-toastr";
+import {Subject} from "rxjs";
+import {BooksService} from "../../../../../common/services/books.service";
 
 @Component({
     selector: "bk-book-view",
@@ -12,8 +15,12 @@ export class BookViewComponent {
     
     @Output() public readonly edit = new EventEmitter<void>();
     
-    constructor() {
-        //
+    private booksService: BooksService;
+    private toastrService: ToastrService;
+    
+    constructor(booksService: BooksService, toastrService: ToastrService) {
+        this.booksService = booksService;
+        this.toastrService = toastrService;
     }
     
     public getHumanReadableAuthors(): string {
@@ -27,5 +34,13 @@ export class BookViewComponent {
     
     public onEdit(): void {
         this.edit.next();
+    }
+    
+    public onDelete(): void {
+        const bookTitle = this.book.title;
+        this.booksService.deleteBook(this.book).subscribe(
+            () => this.toastrService.success(`Книга ${bookTitle} сохранена успешно`),
+            () => this.toastrService.success(`Произошла ошибка при сохранении книги ${bookTitle}`)
+        );
     }
 }
