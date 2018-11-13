@@ -1,12 +1,14 @@
 import {Injectable} from "@angular/core";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {Book} from "../models/entities/book";
 import {HttpClient} from "@angular/common/http";
-import {map, switchMap, tap} from "rxjs/operators";
+import {map, tap} from "rxjs/operators";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class BooksRepository {
     
+    private url = `${environment.production ? "/books" : ""}/assets/initial-data/books.json`;
     private http: HttpClient;
     
     constructor(http: HttpClient) {
@@ -24,7 +26,7 @@ export class BooksRepository {
                 observer.complete();
             });
         } else {
-            return this.http.get<Book[]>("/books/assets/initial-data/books.json")
+            return this.http.get<Book[]>(this.url)
                 .pipe(
                     map((books) => books.map((book) => new Book().fromJSON(book))),
                     tap((books) => this.saveBooksToLocalStorage(books))
