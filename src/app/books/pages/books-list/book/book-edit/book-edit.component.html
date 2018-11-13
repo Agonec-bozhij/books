@@ -179,7 +179,10 @@
             Отмена
         </button>
         
-        <button mat-raised-button color="primary">
+        <button mat-raised-button
+                color="primary"
+                [disabled]="!form.valid"
+                (click)="onSubmit()">
             <mat-icon>save</mat-icon>
             Сохранить
         </button>

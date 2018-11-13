@@ -1,8 +1,10 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from "@angular/core";
 import {Book} from "../../../../../common/models/entities/book";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {fromEvent, Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
+import {BooksService} from "../../../../../common/services/books.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: "bk-book-edit",
@@ -17,10 +19,14 @@ export class BookEditComponent implements OnInit, AfterViewInit, OnDestroy {
     
     @ViewChild("imageInput") public imageInput: ElementRef<HTMLInputElement>;
     
+    private booksService: BooksService;
+    private toastrService: ToastrService;
+    
     private destroy$ = new Subject<void>();
     
-    constructor() {
-        //
+    constructor(booksService: BooksService, toastrService: ToastrService) {
+        this.booksService = booksService;
+        this.toastrService = toastrService;
     }
     
     public ngOnInit(): void {
@@ -34,6 +40,33 @@ export class BookEditComponent implements OnInit, AfterViewInit, OnDestroy {
     public ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
+    }
+    
+    public getAuthorsArray(): AbstractControl[] {
+        return (this.form.get("authors") as FormArray).controls;
+    }
+    
+    public onAddAuthor(): void {
+        (this.form.get("authors") as FormArray).push(new FormGroup({
+            name: new FormControl("", Validators.required),
+            lastname: new FormControl("", Validators.required)
+        }));
+    }
+    
+    public onDeleteAuthor(index: number): void {
+        (this.form.get("authors") as FormArray).removeAt(index);
+    }
+    
+    public onSubmit(): void {
+        if (this.form.valid) {
+            const book = new Book().fromJSON(this.form.value);
+            this.booksService.updateBook(book).pipe(
+            
+            ).subscribe(
+                () => this.toastrService.success(`Книга ${book.title} сохранена успешно`),
+                () => this.toastrService.success(`Произошла ошибка при сохранении книги ${book.title}`)
+            );
+        }
     }
     
     private initializeForm(): void {
@@ -61,8 +94,6 @@ export class BookEditComponent implements OnInit, AfterViewInit, OnDestroy {
         fromEvent(this.imageInput.nativeElement, "change").pipe(
             takeUntil(this.destroy$)
         ).subscribe((event: Event) => {
-            console.log("event", event);
-            
             const reader = new FileReader();
             const file: File = (event.target as HTMLInputElement).files[0];
             reader.onloadend = () => {
