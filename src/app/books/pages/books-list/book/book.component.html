@@ -6,10 +6,15 @@
     </button>
 </div>
 
-<bk-book-view *ngIf="!editMode"
-              [book]="book"
-              (edit)="onEdit()"></bk-book-view>
+<ng-container [ngSwitch]="mode">
+    <bk-book-view *ngSwitchCase="BookMode.View"
+                  (edit)="onEdit()"></bk-book-view>
+    
+    <bk-book-edit *ngSwitchCase="BookMode.Edit"
+                  (cancel)="onCancel()"></bk-book-edit>
+    
+    <bk-book-edit *ngSwitchCase="BookMode.Create"
+                  (cancel)="onCancel()"></bk-book-edit>
+</ng-container>
 
-<bk-book-edit *ngIf="editMode"
-              [book]="book"
-              (cancel)="onCancel()"></bk-book-edit>
+
