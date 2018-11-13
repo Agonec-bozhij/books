@@ -25,4 +25,8 @@ export class BookComponent {
     public onEdit(): void {
         this.editMode = true;
     }
+    
+    public onCancel(): void {
+        this.editMode = false;
+    }
 }

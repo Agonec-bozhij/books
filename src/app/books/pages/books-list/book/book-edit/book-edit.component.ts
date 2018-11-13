@@ -17,6 +17,8 @@ export class BookEditComponent implements OnInit, AfterViewInit, OnDestroy {
     
     public form!: FormGroup;
     
+    @Output() public readonly cancel = new EventEmitter<void>();
+    
     @ViewChild("imageInput") public imageInput: ElementRef<HTMLInputElement>;
     
     private booksService: BooksService;
@@ -55,6 +57,10 @@ export class BookEditComponent implements OnInit, AfterViewInit, OnDestroy {
     
     public onDeleteAuthor(index: number): void {
         (this.form.get("authors") as FormArray).removeAt(index);
+    }
+    
+    public onCancel(): void {
+        this.cancel.next();
     }
     
     public onSubmit(): void {

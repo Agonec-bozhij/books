@@ -11,4 +11,5 @@
               (edit)="onEdit()"></bk-book-view>
 
 <bk-book-edit *ngIf="editMode"
-              [book]="book"></bk-book-edit>
+              [book]="book"
+              (cancel)="onCancel()"></bk-book-edit>
