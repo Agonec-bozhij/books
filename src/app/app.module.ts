@@ -12,6 +12,7 @@ import {HomeComponent} from "./common/components/home/home.component";
 import {HttpClientModule} from "@angular/common/http";
 import {REPOSITORIES_BARREL} from "./common/repositories/repositories-barrel";
 import {SERVICES_BARREL} from "./common/services/services-barrel";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {SERVICES_BARREL} from "./common/services/services-barrel";
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,
-        MaterialModule
+        MaterialModule,
+        ToastrModule.forRoot()
     ],
     providers: [
         REPOSITORIES_BARREL,
