@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component} from "@angular/core";
 import {Book} from "../../../../../common/models/entities/book";
 import {ToastrService} from "ngx-toastr";
-import {Subject} from "rxjs";
 import {BooksService} from "../../../../../common/services/books.service";
+import {BookMode} from "../../../../../common/models/enums/book-mode";
 
 @Component({
     selector: "bk-book-view",
@@ -11,9 +11,9 @@ import {BooksService} from "../../../../../common/services/books.service";
 })
 export class BookViewComponent {
     
-    @Input() public book!: Book;
-    
-    @Output() public readonly edit = new EventEmitter<void>();
+    public get book(): Book {
+        return this.booksService.getSelectedBook();
+    }
     
     private booksService: BooksService;
     private toastrService: ToastrService;
@@ -33,7 +33,7 @@ export class BookViewComponent {
     }
     
     public onEdit(): void {
-        this.edit.next();
+        this.booksService.mode = BookMode.Edit;
     }
     
     public onDelete(): void {
