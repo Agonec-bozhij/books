@@ -45,6 +45,55 @@
         </div>
     </div>
     
+    
+    <div class="form-group form-group--authors" formArrayName="authors">
+        <mat-divider></mat-divider>
+        <p class="form-group_title">Авторы:</p>
+        <div class="form-row"
+             *ngFor="let authorCtrl of getAuthorsArray();let index = index"
+             [formGroupName]="index">
+            <div class="form-control">
+                <mat-form-field>
+                    <mat-label>Имя автора</mat-label>
+                    <input matInput
+                           placeholder="Например: Иван"
+                           formControlName="name"
+                           required>
+                    <mat-error *ngIf="authorCtrl.get('name').hasError('required')">
+                        Поле является обязательным
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            
+            <div class="form-control">
+                <mat-form-field>
+                    <mat-label>Фамилия автора</mat-label>
+                    <input matInput
+                           placeholder="Например: Петров"
+                           formControlName="lastname"
+                           required>
+                    <mat-error *ngIf="authorCtrl.get('lastname').hasError('required')">
+                        Поле является обязательным
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            
+            <div class="form-row_delete">
+                <button mat-icon-button (click)="onDeleteAuthor(index)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        
+        <div class="form-group_actions">
+            <button mat-raised-button (click)="onAddAuthor()">
+                <mat-icon>playlist_add</mat-icon>
+                Добавить автора
+            </button>
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+    
     <div class="form-group">
         <div class="form-control">
             <mat-form-field>

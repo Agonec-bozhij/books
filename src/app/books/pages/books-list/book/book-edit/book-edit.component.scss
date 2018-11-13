@@ -9,6 +9,25 @@
 
     &-group {
 
+        &--authors {
+            margin: 24px 0;
+        }
+
+        &_actions {
+            text-align: right;
+            margin-bottom: 24px;
+        }
+
+        &_title {
+            padding: 24px 0;
+        }
+    }
+
+    &-row {
+        display: flex;
+
+        & .form-control {
+        }
     }
 
     &-control {
