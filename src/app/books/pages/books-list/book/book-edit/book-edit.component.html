@@ -14,6 +14,10 @@
                 <mat-error *ngIf="form.get('title').hasError('required')">
                     Поле является обязательным
                 </mat-error>
+                
+                <mat-error *ngIf="form.get('title').hasError('maxlength')">
+                    Не более 30 символов
+                </mat-error>
             </mat-form-field>
         </div>
     </div>
@@ -62,6 +66,10 @@
                     <mat-error *ngIf="authorCtrl.get('name').hasError('required')">
                         Поле является обязательным
                     </mat-error>
+                    
+                    <mat-error *ngIf="authorCtrl.get('name').hasError('maxlength')">
+                        Не более 20 символов
+                    </mat-error>
                 </mat-form-field>
             </div>
             
@@ -75,6 +83,10 @@
                     <mat-error *ngIf="authorCtrl.get('lastname').hasError('required')">
                         Поле является обязательным
                     </mat-error>
+                    
+                    <mat-error *ngIf="authorCtrl.get('lastname').hasError('maxlength')">
+                        Не более 20 символов
+                    </mat-error>
                 </mat-form-field>
             </div>
             
@@ -83,7 +95,12 @@
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
+        
         </div>
+        
+        <mat-error *ngIf="form.get('authors').hasError('minArrayLength')">
+            Должен быть хотя-бы один автор
+        </mat-error>
         
         <div class="form-group_actions">
             <button mat-raised-button (click)="onAddAuthor()">
@@ -106,6 +123,14 @@
                 <mat-error *ngIf="form.get('pages').hasError('required')">
                     Поле является обязательным
                 </mat-error>
+                
+                <mat-error *ngIf="form.get('pages').hasError('min')">
+                    Не менее 1й страницы
+                </mat-error>
+                
+                <mat-error *ngIf="form.get('pages').hasError('max')">
+                    Не более 10000 страниц
+                </mat-error>
             </mat-form-field>
         </div>
     </div>
@@ -116,10 +141,10 @@
                 <mat-label>Издательство</mat-label>
                 <input matInput
                        placeholder="Например: Издательсво Питер"
-                       formControlName="publisher"
-                       required>
-                <mat-error *ngIf="form.get('publisher').hasError('required')">
-                    Поле является обязательным
+                       formControlName="publisher">
+                
+                <mat-error *ngIf="form.get('publisher').hasError('maxlength')">
+                    Не более 30 символов
                 </mat-error>
             </mat-form-field>
         </div>
@@ -132,9 +157,9 @@
                 <input matInput
                        placeholder="Например: 1998"
                        formControlName="publicationYear"
-                       required>
-                <mat-error *ngIf="form.get('publicationYear').hasError('required')">
-                    Поле является обязательным
+                       type="number">
+                <mat-error *ngIf="form.get('publicationYear').hasError('min')">
+                    Не раньше 1800 года
                 </mat-error>
             </mat-form-field>
         </div>
@@ -147,7 +172,8 @@
                 <input matInput
                        formControlName="releaseDate"
                        [matDatepicker]="picker"
-                       placeholder="Выберите дату">
+                       placeholder="Выберите дату"
+                       [min]="minValidDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error *ngIf="form.get('releaseDate').hasError('required')">
@@ -165,8 +191,8 @@
                        placeholder="Например: 111-222-333"
                        formControlName="isbn"
                        required>
-                <mat-error *ngIf="form.get('isbn').hasError('required')">
-                    Поле является обязательным
+                <mat-error *ngIf="form.get('isbn').hasError('isbn')">
+                    Невалиднывй код ISBN
                 </mat-error>
             </mat-form-field>
         </div>

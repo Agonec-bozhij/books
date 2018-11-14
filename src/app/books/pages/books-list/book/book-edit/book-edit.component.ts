@@ -7,6 +7,7 @@ import {BooksService} from "../../../../../common/services/books.service";
 import {ToastrService} from "ngx-toastr";
 import {BookMode} from "../../../../../common/models/enums/book-mode";
 import {Author} from "../../../../../common/models/entities/author";
+import {CustomValidators} from "../../../../../common/utils/custom-validators";
 
 @Component({
     selector: "bk-book-edit",
@@ -17,6 +18,7 @@ export class BookEditComponent implements OnInit, AfterViewInit, OnDestroy {
     
     public BookMode = BookMode;
     public form!: FormGroup;
+    public minValidDate = new Date(1800, 0, 1);
     
     public get book(): Book {
         return this.booksService.getSelectedBook();
@@ -66,6 +68,7 @@ export class BookEditComponent implements OnInit, AfterViewInit, OnDestroy {
     
     public onDeleteAuthor(index: number): void {
         (this.form.get("authors") as FormArray).removeAt(index);
+        console.log("form", this.form);
     }
     
     public onCancel(): void {
@@ -94,13 +97,13 @@ export class BookEditComponent implements OnInit, AfterViewInit, OnDestroy {
         const edit: boolean | null = this.mode === BookMode.Edit || null;
         
         this.form = new FormGroup({
-            title: new FormControl(edit && this.book.title, Validators.required),
-            authors: new FormArray(this.getAuthorsGroups(edit ? this.book.authors : [])),
-            pages: new FormControl(edit && this.book.pages, Validators.required),
-            publisher: new FormControl(edit && this.book.publisher, Validators.required),
-            publicationYear: new FormControl(edit && this.book.publicationYear, Validators.required),
+            title: new FormControl(edit && this.book.title, [Validators.required, Validators.maxLength(30)]),
+            authors: new FormArray(this.getAuthorsGroups(edit ? this.book.authors : []), CustomValidators.minArrayLength(1)),
+            pages: new FormControl(edit && this.book.pages, [Validators.required, Validators.min(1), Validators.max(10000)]),
+            publisher: new FormControl(edit && this.book.publisher, Validators.maxLength(30)),
+            publicationYear: new FormControl(edit && this.book.publicationYear, Validators.min(1800)),
             releaseDate: new FormControl(edit && this.book.releaseDate, Validators.required),
-            isbn: new FormControl(edit && this.book.isbn, Validators.required),
+            isbn: new FormControl(edit && this.book.isbn, CustomValidators.isbn),
             image: new FormControl(edit && this.book.image)
         });
     }
@@ -108,8 +111,8 @@ export class BookEditComponent implements OnInit, AfterViewInit, OnDestroy {
     private getAuthorsGroups(authors: Author[]): FormGroup[] {
         return authors
             .map((author) => new FormGroup({
-                name: new FormControl(author.name, Validators.required),
-                lastname: new FormControl(author.lastname, Validators.required)
+                name: new FormControl(author.name, [Validators.required, Validators.maxLength(20)]),
+                lastname: new FormControl(author.lastname, [Validators.required, Validators.maxLength(20)])
             }));
     }
     
