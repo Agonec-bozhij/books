@@ -3,6 +3,10 @@ import {AbstractControl, FormArray, ValidationErrors, ValidatorFn} from "@angula
 export class CustomValidators {
     
     public static isbn: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+        if (control.value === null || (control.value.length === 0)) {
+            return null;
+        }
+        
         let valid = false;
         const isbn: string = control.value.replace(/[^\d]+/g, "");
         
