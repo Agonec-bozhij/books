@@ -8,13 +8,15 @@ import {BookViewComponent} from "./pages/books-list/book/book-view/book-view.com
 import {BookComponent} from "./pages/books-list/book/book.component";
 import {BookEditComponent} from "./pages/books-list/book/book-edit/book-edit.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import { SortIndicatorComponent } from './components/sort-indicator/sort-indicator.component';
 
 @NgModule({
     declarations: [
         BooksListComponent,
         BookViewComponent,
         BookComponent,
-        BookEditComponent
+        BookEditComponent,
+        SortIndicatorComponent
     ],
     imports: [
         CommonModule,

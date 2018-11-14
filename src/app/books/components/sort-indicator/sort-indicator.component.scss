@@ -1,0 +1,17 @@
+:host {
+    margin-left: 6px;
+}
+
+.indicator {
+    & mat-icon {
+        &:first-child {
+            transform: rotate(-90deg);
+            margin-right: -7px
+        }
+
+        &:last-child {
+            transform: rotate(90deg);
+            margin-left: -7px;
+        }
+    }
+}

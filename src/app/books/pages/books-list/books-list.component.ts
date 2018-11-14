@@ -5,6 +5,7 @@ import {takeUntil} from "rxjs/operators";
 import {bookListTrigger, BookState, bookTrigger} from "../../../common/animations/collapse.animations";
 import {Subject} from "rxjs";
 import {BookMode} from "../../../common/models/enums/book-mode";
+import {SortState} from "../../../common/models/dtos/sort-state";
 
 @Component({
     selector: "bk-books-list",
@@ -65,5 +66,13 @@ export class BooksListComponent implements OnInit, OnDestroy {
     
     public getListCollpasedState(): BookState {
         return this.bookHidden() ? BookState.Expanded : BookState.Collapsed;
+    }
+    
+    public changeSort(field: string) {
+        this.booksService.setSort(field);
+    }
+    
+    public getSort(): SortState {
+        return this.booksService.getSort();
     }
 }

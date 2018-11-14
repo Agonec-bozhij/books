@@ -26,6 +26,13 @@
 
                 & .books-list_col {
                     white-space: nowrap;
+                    display: flex;
+                    align-items: center;
+                    user-select: none;
+
+                    &-text {
+                        line-height: 28px;
+                    }
                 }
             }
         }
@@ -60,6 +67,10 @@
 
                 &--authors {
                     flex-direction: column;
+                }
+
+                &--pub-year {
+                    flex-basis: 130%;
                 }
 
                 &_author {

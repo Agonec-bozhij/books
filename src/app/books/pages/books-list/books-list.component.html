@@ -17,13 +17,32 @@
         <div class="books-list mat-elevation-z6">
             <div class="books-list_head">
                 <div class="books-list_row">
-                    <div class="books-list_col books-list_col--title">Название</div>
-                    <div class="books-list_col">Авторы</div>
-                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">Стр.</div>
-                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">Издатель</div>
-                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">Год публикации</div>
-                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">Дата выхода</div>
-                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">ISBN</div>
+                    <div class="books-list_col books-list_col--title" (click)="changeSort('title')">
+                        <span class="books-list_col-text">Название</span>
+                        <bk-sort-indicator *ngIf="getSort().field === 'title'"
+                                           [direction]="getSort().direction"></bk-sort-indicator>
+                    </div>
+                    <div class="books-list_col">
+                        <span class="books-list_col-text">Авторы</span>
+                    </div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">
+                        <span class="books-list_col-text">Стр.</span>
+                    </div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">
+                        <span class="books-list_col-text">Издатель</span>
+                    </div>
+                    <div *ngIf="bookHidden()" class="books-list_col books-list_col--pub-year animation-col-collapse"
+                         (click)="changeSort('publicationYear')">
+                        <span class="books-list_col-text">Год публ.</span>
+                        <bk-sort-indicator *ngIf="getSort().field === 'publicationYear'"
+                                           [direction]="getSort().direction"></bk-sort-indicator>
+                    </div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">
+                        <span class="books-list_col-text">Дата выхода</span>
+                    </div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">
+                        <span class="books-list_col-text">ISBN</span>
+                    </div>
                 </div>
             </div>
             
@@ -38,12 +57,17 @@
                         {{author.name}} {{author.lastname}}
                     </span>
                     </div>
-                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">{{book.pages}}</div>
-                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">{{book.publisher}}</div>
-                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">{{book.publicationYear}}
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">
+                        {{book.pages}}
                     </div>
-                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">{{book.releaseDate |
-                        date:"dd/MM/yyyy"}}
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">
+                        {{book.publisher}}
+                    </div>
+                    <div *ngIf="bookHidden()" class="books-list_col books-list_col--pub-year animation-col-collapse">
+                        {{book.publicationYear}}
+                    </div>
+                    <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">
+                        {{book.releaseDate | date:"dd/MM/yyyy"}}
                     </div>
                     <div *ngIf="bookHidden()" class="books-list_col animation-col-collapse">{{book.isbn}}</div>
                 </div>
